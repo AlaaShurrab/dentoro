@@ -1,16 +1,15 @@
-.landing-page-container{
+.landing-page-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items:center;
+  align-items: center;
   width: 100vw;
 }
 
-.landing-page-content{
+.landing-page-content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items:center;
+  align-items: center;
   width: var(--landing-page-content-width);
 }
-

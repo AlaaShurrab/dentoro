@@ -1,20 +1,17 @@
-.login{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f2f5;
-
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f2f5;
 }
 
-.loginBody{
-    display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    align-items: center;
-    width:80%;
-    border-radius: 5px;
+.loginBody {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  border-radius: 5px;
 }
-
-

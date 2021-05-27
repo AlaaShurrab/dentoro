@@ -1,92 +1,91 @@
 .page-layout {
-	min-height: 100vh;
-	overflow: hidden;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .header-navbar {
-	height: 100%;
+  height: 100%;
   display: flex;
-	justify-content:space-between;
-	align-items: center;
-	background-color: white;
-	border-bottom: 1px solid black;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid black;
   box-shadow: 2px 0 3px black;
 }
 
-.nave-icon-style-menu{
+.nave-icon-style-menu {
   font-size: 2rem;
   padding-left: 20px;
 }
 
-.nav-icon-style-home{
-	font-size: 2rem;
+.nav-icon-style-home {
+  font-size: 2rem;
   padding-right: 20px;
 }
 
 .menu-items {
-	font-weight: 800;
+  font-weight: 800;
 }
 
 .menu-item {
-	color: white !important;
-	font-weight: 800;
+  color: white !important;
+  font-weight: 800;
 }
 
 .logout-item {
-	color: rgba(255, 255, 255, 0.618) !important;
-	font-weight: 800;
+  color: rgba(255, 255, 255, 0.618) !important;
+  font-weight: 800;
 }
 
 .logo {
-	height: 200px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	flex-direction: column;
-	visibility: visible;
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  visibility: visible;
 }
 
 .logo-hidden {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .title-text {
-	color: white !important;
-	font-weight: 800;
+  color: white !important;
+  font-weight: 800;
 }
 
 .site-layout .site-layout-background {
-	background: #fff;
-	padding: 0;
+  background: #fff;
+  padding: 0;
 }
+
 [data-theme='dark'] .site-layout .site-layout-background {
-	background: #141414;
+  background: #141414;
 }
 
 .site-layout-content {
-	margin: 0 16px;
-	display: flex;
-	justify-content: center;
-	align-items:center;
+  margin: 0 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .site-layout-content-body {
-	padding: 24;
-	width: 80%;
-	display: flex;
+  padding: 24;
+  width: 80%;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
-	align-items: center;
+  align-items: center;
   height: 80vh;
   overflow: auto;
 }
 
 .site-layout-footer {
-	text-align: center;
+  text-align: center;
 }
 
-@media screen and (max-width:1200px) {
-	.site-layout-content-body {width: 100%}
+@media screen and (max-width: 1200px) {
+  .site-layout-content-body { width: 100%; }
 }
-
-
