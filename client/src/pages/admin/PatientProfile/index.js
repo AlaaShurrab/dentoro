@@ -22,29 +22,27 @@ function PatientProfile() {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const { patientId } = useParams();
-
-  const getPatientProfileData = async () => {
-    try {
-      const {
-        data: { data: patientProfileData },
-      } = await get(`/api/v1/patients/${patientId}`);
-      setLoading(false);
-      return setProfileData(patientProfileData);
-    } catch (err) {
-      setLoading(false);
-      if (err.response) {
-        const {
-          response: { data },
-        } = err;
-        return setErrorMessage(data.message ? data.message : data);
-      }
-      return setErrorMessage(err);
-    }
-  };
-
   useEffect(() => {
-    getPatientProfileData();
+    (async () => {
+      try {
+        const {
+          data: { data: patientProfileData },
+        } = await get(`/api/v1/patients/${patientId}`);
+        setLoading(false);
+        return setProfileData(patientProfileData);
+      } catch (err) {
+        setLoading(false);
+        if (err.response) {
+          const {
+            response: { data },
+          } = err;
+          return setErrorMessage(data.message ? data.message : data);
+        }
+        return setErrorMessage(err);
+      }
+    })();
   }, [patientId, updateDate]);
+
   return (
     <div className="profile-page-container">
       {loading ? (
