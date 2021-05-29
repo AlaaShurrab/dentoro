@@ -28,6 +28,7 @@
     "lint": "run-s lint:*",
     "lint:code": "eslint --fix ./src --ext .js,.jsx,.ts,.tsx",
     "lint:type": "tsc",
+    "lint:format": "prettier -w . -u --loglevel silent",
     "lint:style": "stylelint --fix \"**/*.{css,ts,tsx}\""
   },
   "dependencies": {
