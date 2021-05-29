@@ -18,7 +18,7 @@ module.exports = {
       typescript: {},
     },
   },
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   rules: {
     'no-param-reassign': 'off',
     'global-require': 'off',
@@ -43,6 +43,12 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     'testing-library/no-node-access': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+      },
+    ],
   },
   globals: {
     JSX: true,
