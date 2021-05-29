@@ -1,5 +1,4 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
-import React from 'react';
 
 import { PrivateRoutes, LoggedOutRoutes } from './Routes';
 
@@ -14,7 +13,7 @@ import PatientsAppointmentTable from '../pages/admin/PatientsAppointmentTable';
 
 import './App.css';
 
-const App = () => (
+const App = (): JSX.Element => (
   <div className="App">
     <Switch>
       <Route exact path="/">

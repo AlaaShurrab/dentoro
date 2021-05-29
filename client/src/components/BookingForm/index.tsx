@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Form,
   Input,
@@ -10,16 +10,18 @@ import {
   Alert,
   message,
 } from 'antd';
-import axios from 'axios';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
+import Axios from 'axios';
+
 import Image from '../common/Image';
-import './style.css';
 import Hours from './Hours';
 import bookingFormImage from '../../assets/images/undraw_Booking_re_gw4j.svg';
 
+import './style.css';
+
 const { Title } = Typography;
 
-const successMessage = (dataCount) => {
+const successMessage = (dataCount: number) => {
   if (!dataCount) {
     return message.info({
       content: `Please Choose another Appointment date! There are : ${dataCount} available appointments `,
@@ -35,17 +37,22 @@ const failedMessage = (errorMessage = '') => {
     content: `Failed! ${errorMessage ? `${errorMessage}` : errorMessage}`,
   });
 };
-const BookingForm = () => {
+
+const BookingForm = (): JSX.Element => {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [timeAppear, setTimeAppear] = useState(true);
-  const [availableHours, setAvailableHours] = useState([]);
-  const [error, setError] = useState();
+  const [availableHours, setAvailableHours] = useState<number[]>([]);
+  const [error, setError] = useState(false);
 
-  const disabledDate = (current) =>
+  const disabledDate = (current: Moment) =>
     current && current < moment().startOf('day');
 
-  const onDateTrigger = async ({ appointmentDate }) => {
+  const onDateTrigger = async ({
+    appointmentDate,
+  }: {
+    appointmentDate: Moment;
+  }) => {
     if (appointmentDate) {
       const hideLoadingMessage = message.loading(
         `Get The Available Appointment in ${appointmentDate} ... `,
@@ -54,7 +61,7 @@ const BookingForm = () => {
       try {
         const {
           data: { data: availableTimes },
-        } = await axios.get(
+        } = await Axios.get(
           `/api/v1/appointments/available/${moment(appointmentDate).format(
             'YYYY-MM-DD'
           )}`
@@ -62,11 +69,10 @@ const BookingForm = () => {
 
         setTimeAppear(availableTimes.length === 0);
         hideLoadingMessage.then(() => successMessage(availableTimes.length));
-        setAvailableHours(
-          Hours.filter((hour) => !availableTimes.includes(hour)).map(
-            (hour) => +hour.split(':')[0]
-          )
-        );
+        const temp: number[] = Hours.filter(
+          (hour) => !availableTimes.includes(hour)
+        ).map((hour) => +hour.split(':')[0]);
+        setAvailableHours(temp);
       } catch (err) {
         hideLoadingMessage.then(() =>
           failedMessage(
@@ -79,6 +85,7 @@ const BookingForm = () => {
     }
   };
 
+  // TODO: update the type
   const onFinish = async ({
     firstName,
     lastName,
@@ -89,10 +96,10 @@ const BookingForm = () => {
     appointmentDate,
     appointmentTime,
     complaints,
-  }) => {
+  }: any) => {
     try {
       setLoading(true);
-      await axios.post('/api/v1/appointments', {
+      await Axios.post('/api/v1/appointments', {
         firstName,
         lastName,
         email,
@@ -126,11 +133,7 @@ const BookingForm = () => {
       {success ? (
         <div className="success">
           <Result status="success" title="Booked successfully" />
-          <Button
-            value={success}
-            type="primary"
-            onClick={() => setSuccess(false)}
-          >
+          <Button type="primary" onClick={() => setSuccess(false)}>
             Book again
           </Button>
         </div>
@@ -146,13 +149,7 @@ const BookingForm = () => {
               Book an appointment
             </Title>
             {error && (
-              <Alert
-                className="err"
-                id="alert"
-                message={error}
-                type="error"
-                showIcon
-              />
+              <Alert className="err" message={error} type="error" showIcon />
             )}
             <div className="booking-form-row">
               <Form.Item
@@ -180,11 +177,7 @@ const BookingForm = () => {
               >
                 <Input placeholder="Email" />
               </Form.Item>
-              <Form.Item
-                className="booking-form-item"
-                name="birthday"
-                placeholder="Birthday"
-              >
+              <Form.Item className="booking-form-item" name="birthday">
                 <DatePicker placeholder="Birthday" />
               </Form.Item>
             </div>
@@ -260,11 +253,7 @@ const BookingForm = () => {
             </Form.Item>
           </Form>
           <div className="booking-form-image-container">
-            <Image
-              src={bookingFormImage}
-              alt=""
-              className="booking-form-image"
-            />
+            <Image src={bookingFormImage} alt="" />
           </div>
         </div>
       )}
