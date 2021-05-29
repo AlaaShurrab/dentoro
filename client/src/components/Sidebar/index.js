@@ -86,7 +86,7 @@ const Sidebar = ({ children }) => {
             <Link to="/dashboard/patients">Patients</Link>
           </Menu.Item>
         </Menu>
-        <Menu.Divider />
+        {/* <Menu.Divider /> */}
         <Menu theme="dark">
           <Menu.Item
             onClick={logoutFunction}
