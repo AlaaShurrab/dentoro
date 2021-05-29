@@ -59,6 +59,7 @@ const Patients = () => {
     return () => {
       source.cancel('clean up axios');
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   const columns = [
