@@ -1,11 +1,12 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-webpack-loader-syntax */
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import './style.css';
-import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 import React, { useEffect, useRef } from 'react';
 import { Popover, Button } from 'antd';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './style.css';
 
 import {
   objectOf,
@@ -91,4 +92,5 @@ MapComponent.propTypes = {
     info: arrayOf(objectOf(oneOfType([element, string]))),
   }).isRequired,
 };
+
 export default MapComponent;
