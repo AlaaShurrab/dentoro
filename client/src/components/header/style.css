@@ -20,7 +20,12 @@
 
 .content {
   position: relative;
-  background-image: linear-gradient(rgba(151, 220, 227, 0.3764705882352941), rgba(151, 220, 227, 0.3764705882352941)), url(../../assets/images/theme1.png);
+  background-image:
+    linear-gradient(
+      rgba(151, 220, 227, 0.3764705882352941),
+      rgba(151, 220, 227, 0.3764705882352941)
+    ),
+    url(../../assets/images/theme1.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
