@@ -17,6 +17,7 @@ switch (NODE_ENV) {
 
   case 'development':
     dbUrl = DEV_DB_URL;
+    ssl = false;
     break;
 
   case 'test':
