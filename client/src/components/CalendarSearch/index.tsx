@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Input, Select, Button, Form } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { string } from 'prop-types';
+
 import './style.css';
+
+interface Props {
+  searchFor?: string;
+}
 
 const { Option } = Select;
 
-const CalendarSearch = ({ searchFor }) => {
+const CalendarSearch = ({ searchFor }: Props): JSX.Element => {
   const history = useHistory();
   const [selectOption, setSelectOption] = useState('name');
-  const searchFunction = (values) => {
+
+  // TODO: update values type
+  const searchFunction = (values: any) => {
     const params = Object.fromEntries(
       Object.entries(values).map(([key, value]) => {
         if (key === 'phone') return [key, value];
@@ -17,10 +23,9 @@ const CalendarSearch = ({ searchFor }) => {
       })
     );
     if (searchFor === 'Appointments')
-      return history.push('/dashboard/calendar/appointmentsearch', { params });
-    if (searchFor === 'Patients')
-      return history.push('/dashboard/patients', { params });
-    return null;
+      history.push('/dashboard/calendar/appointmentsearch', { params });
+    else if (searchFor === 'Patients')
+      history.push('/dashboard/patients', { params });
   };
 
   return (
@@ -82,7 +87,6 @@ const CalendarSearch = ({ searchFor }) => {
           </Form.Item>
         </div>
       )}
-
       <div>
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -96,9 +100,6 @@ const CalendarSearch = ({ searchFor }) => {
 
 CalendarSearch.defaultProps = {
   searchFor: 'Appointments',
-};
-CalendarSearch.propTypes = {
-  searchFor: string,
 };
 
 export default CalendarSearch;

@@ -1,36 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Table, message, Button } from 'antd';
 import axios from 'axios';
-import './style.css';
 
 import CustomTitle from '../common/Title';
 import SearchComponent from '../CalendarSearch';
 import Loading from '../common/Loading';
 
-const Patients = () => {
+import './style.css';
+
+interface LocationState {
+  params: string;
+}
+
+const successMessage = (dataCount: string) => {
+  message.success({
+    content: `Success! Result Count : ${dataCount}`,
+  });
+};
+
+const failedMessage = (errorMessage = '') => {
+  message.error({
+    content: `Failed! ${errorMessage ? `${errorMessage}` : errorMessage}`,
+  });
+};
+
+let params: string;
+
+const Patients = (): JSX.Element => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
-  const { state } = useLocation();
-  let params;
+  const { state } = useLocation<LocationState>();
   let getPatientsData = () => axios.get(`/api/v1/patients`);
   if (state) {
     params = state.params;
     getPatientsData = () => axios.get('/api/v1/patients/search', { params });
   }
 
-  const successMessage = (dataCount) => {
-    message.success({
-      content: `Success! Result Count : ${dataCount}`,
-    });
-  };
-
-  const failedMessage = (errorMessage = '') => {
-    message.error({
-      content: `Failed! ${errorMessage ? `${errorMessage}` : errorMessage}`,
-    });
-  };
   const fetchPatients = async () => {
     const hideLoadingMessage = message.loading('Action in progress..', 0.5);
     try {
@@ -102,7 +109,7 @@ const Patients = () => {
             dataSource={dataSource}
             columns={columns}
             rowKey="id"
-            onRow={(record) => ({
+            onRow={(record: any) => ({
               onClick: () => history.push(`patients/${record.id}`),
             })}
           />

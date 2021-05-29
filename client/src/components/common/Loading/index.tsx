@@ -1,10 +1,13 @@
-import React from 'react';
 import { Spin } from 'antd';
-import { string } from 'prop-types';
 
 import './style.css';
 
-const Loading = ({ size, className }) => (
+interface Props {
+  size: 'small' | 'default' | 'large';
+  className?: string;
+}
+
+const Loading = ({ size, className }: Props): JSX.Element => (
   <div className={`spin-style ${className}`}>
     <Spin size={size} />
   </div>
@@ -13,8 +16,5 @@ const Loading = ({ size, className }) => (
 Loading.defaultProps = {
   className: '',
 };
-Loading.propTypes = {
-  size: string.isRequired,
-  className: string,
-};
+
 export default Loading;

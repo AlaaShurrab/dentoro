@@ -1,13 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
-import { bool } from 'prop-types';
 import { message } from 'antd';
+
 import CalendarSearch from '../CalendarSearch';
 import PatientSearchTable from '../PatientSearchTable';
 
-const PatientSearchDateTable = ({ showSearchBar }) => {
+interface Props {
+  showSearchBar?: boolean;
+}
+
+interface LocationState {
+  params: string;
+  date: string;
+}
+
+const successMessage = (dataCount: string) => {
+  message.success({
+    content: `Success! Result Count : ${dataCount}`,
+  });
+};
+
+const failedMessage = (errorMessage = '') => {
+  message.error({
+    content: `Failed! ${errorMessage ? `${errorMessage}` : errorMessage}`,
+  });
+};
+
+let params: string;
+const PatientSearchDateTable = ({
+  showSearchBar = true,
+}: Props): JSX.Element => {
   const [appointmentsData, setAppointmentsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -15,8 +39,8 @@ const PatientSearchDateTable = ({ showSearchBar }) => {
 
   let getPatientsData = () =>
     axios.get(`/api/v1/appointments/${moment().format('YYYY-MM-DD')}`);
-  let params;
-  const { state } = useLocation();
+
+  const { state } = useLocation<LocationState>();
   if (state) {
     const dayDate = state.date;
     params = state.params;
@@ -29,17 +53,6 @@ const PatientSearchDateTable = ({ showSearchBar }) => {
     }
   }
 
-  const successMessage = (dataCount) => {
-    message.success({
-      content: `Success! Result Count : ${dataCount}`,
-    });
-  };
-
-  const failedMessage = (errorMessage = '') => {
-    message.error({
-      content: `Failed! ${errorMessage ? `${errorMessage}` : errorMessage}`,
-    });
-  };
   useEffect(() => {
     const hideLoadingMessage = message.loading('Action in progress..', 0.5);
     let unmounted = false;
@@ -47,7 +60,8 @@ const PatientSearchDateTable = ({ showSearchBar }) => {
     getPatientsData()
       .then(({ data: { data } }) => {
         if (!unmounted) {
-          const newData = data.map((item) => ({
+          // TODO
+          const newData = data.map((item: any) => ({
             key: item.appointment_id,
             patientId: item.patient_id,
             appointmentDate: moment(item.appointment_date).format('YYYY-MM-DD'),
@@ -55,7 +69,8 @@ const PatientSearchDateTable = ({ showSearchBar }) => {
             firstName: item.firstname,
             lastName: item.lastname,
             isDone: item.is_done || false,
-            age: moment().format('YYYY') - moment(item.birthday).format('YYYY'),
+            age:
+              +moment().format('YYYY') - +moment(item.birthday).format('YYYY'),
           }));
           setAppointmentsData(newData);
           setLoading(false);
@@ -82,6 +97,7 @@ const PatientSearchDateTable = ({ showSearchBar }) => {
       unmounted = true;
       source.cancel('Cancelling in cleanup');
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update, params]);
 
   return (
@@ -95,10 +111,6 @@ const PatientSearchDateTable = ({ showSearchBar }) => {
       />
     </div>
   );
-};
-
-PatientSearchDateTable.propTypes = {
-  showSearchBar: bool,
 };
 
 PatientSearchDateTable.defaultProps = {

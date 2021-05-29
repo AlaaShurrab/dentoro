@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Calendar } from 'antd';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
-const CalendarComponent = () => {
+const CalendarComponent = (): JSX.Element => {
   const [value, setValue] = useState(moment());
   const history = useHistory();
 
-  const onSelect = (date) => {
+  const onSelect = (date: Moment) => {
     setValue(date);
     const dateFormat = date.format('YYYY-MM-DD');
     history.push(`/dashboard/calendar/${dateFormat}`, {
@@ -16,7 +16,7 @@ const CalendarComponent = () => {
     });
   };
 
-  const onPanelChange = (date) => {
+  const onPanelChange = (date: Moment) => {
     setValue(date);
   };
 

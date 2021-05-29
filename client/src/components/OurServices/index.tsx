@@ -1,12 +1,12 @@
-import React from 'react';
 import { Typography } from 'antd';
 
 import Services from './data';
+
 import './style.css';
 
 const { Title, Text } = Typography;
 
-const OurServices = () => (
+const OurServices = (): JSX.Element => (
   <div className="ourService-display" id="our-services">
     <div className="ourService-container">
       <div className="ourService-content">

@@ -1,12 +1,12 @@
-import React from 'react';
 import { Typography } from 'antd';
 
 import Services from './data';
+
 import './style.css';
 
 const { Title, Text } = Typography;
 
-const Header = () => (
+const Header = (): JSX.Element => (
   <div className="Service-display" id="home">
     <div className="container">
       <div className="content">
@@ -28,4 +28,5 @@ const Header = () => (
     </div>
   </div>
 );
+
 export default Header;

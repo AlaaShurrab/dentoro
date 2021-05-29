@@ -1,7 +1,6 @@
-import React from 'react';
 import ServiceCard from '../ServiceCard';
 
-const Services = [
+const Services: JSX.Element[] = [
   <ServiceCard
     key="1"
     coverIcon={
@@ -80,4 +79,5 @@ const Services = [
     ServiceDescription="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque necessitatibus quidem nesciunt dolor"
   />,
 ];
+
 export default Services;

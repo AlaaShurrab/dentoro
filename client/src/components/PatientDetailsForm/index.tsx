@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import moment from 'moment';
+import { useState } from 'react';
 import {
   Form,
   Input,
@@ -9,10 +8,28 @@ import {
   message,
   Switch,
 } from 'antd';
-import { patch } from 'axios';
-import './style.css';
-import { number, objectOf, oneOfType, string, func } from 'prop-types';
 import { CloseOutlined, CheckOutlined, EditOutlined } from '@ant-design/icons';
+import moment from 'moment';
+import Axios from 'axios';
+
+import './style.css';
+
+export interface ProfileData {
+  firstname: string;
+  diseases: string;
+  lastname: string;
+  phone: string;
+  balance: string;
+  email: string;
+  birthday: any; // TODO
+}
+
+interface Props {
+  profileData: ProfileData;
+  patientId: number;
+  setRefreshDate: React.Dispatch<React.SetStateAction<boolean>>;
+  refreshDate: boolean;
+}
 
 const layout = {
   labelCol: {
@@ -22,6 +39,7 @@ const layout = {
     span: 80,
   },
 };
+
 const tailLayout = {
   wrapperCol: {
     offset: 10,
@@ -43,7 +61,12 @@ const failedMessage = (errorMessage = '') => {
   });
 };
 
-const PatientDetailsForm = ({ profileData, patientId, setUpdateDate }) => {
+const PatientDetailsForm = ({
+  profileData,
+  patientId,
+  setRefreshDate,
+  refreshDate,
+}: Props): JSX.Element => {
   const {
     firstname: firstName,
     birthday,
@@ -56,18 +79,18 @@ const PatientDetailsForm = ({ profileData, patientId, setUpdateDate }) => {
 
   const [isEditable, setIsEditable] = useState(false);
   const [form] = Form.useForm();
-  const onFinish = async (event) => {
+  const onFinish = async (event: ProfileData) => {
     if (!isEditable) return;
     const hideLoadingMessage = message.loading('Action in progress..', 1);
     const { birthday: eventBirthday } = event;
     try {
-      await patch(`/api/v1/patients/${patientId}`, {
+      await Axios.patch(`/api/v1/patients/${patientId}`, {
         ...event,
         birthday: eventBirthday.format('YYYY-MM-DD'),
       });
       setIsEditable(false);
       hideLoadingMessage.then(() => successMessage());
-      setUpdateDate((x) => x + 1);
+      setRefreshDate(!refreshDate);
     } catch (err) {
       if (err.response) {
         const { data } = err.response;
@@ -215,7 +238,9 @@ const PatientDetailsForm = ({ profileData, patientId, setUpdateDate }) => {
           initialValue={balance}
         >
           <InputNumber
-            formatter={(value) => `${parseFloat(value).toFixed(2)} ₪`}
+            formatter={(value: any): string =>
+              `${parseFloat(value).toFixed(2)} ₪`
+            }
             readOnly
             bordered={false}
             className={`input-background-transparent ${
@@ -255,9 +280,5 @@ const PatientDetailsForm = ({ profileData, patientId, setUpdateDate }) => {
     </Form>
   );
 };
-PatientDetailsForm.propTypes = {
-  profileData: objectOf(oneOfType([number, string])).isRequired,
-  patientId: number.isRequired,
-  setUpdateDate: func.isRequired,
-};
+
 export default PatientDetailsForm;

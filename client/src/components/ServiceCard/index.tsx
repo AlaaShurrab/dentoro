@@ -1,13 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
 
 import { Card } from 'antd';
 
 import './style.css';
 
+interface Props {
+  coverIcon: ReactNode;
+  ServiceTitle: string;
+  ServiceDescription: string;
+}
+
 const { Meta } = Card;
 
-const ServiceCard = ({ coverIcon, ServiceTitle, ServiceDescription }) => (
+const ServiceCard = ({
+  coverIcon,
+  ServiceTitle,
+  ServiceDescription,
+}: Props): JSX.Element => (
   <div>
     <Card
       hoverable
@@ -25,11 +34,5 @@ const ServiceCard = ({ coverIcon, ServiceTitle, ServiceDescription }) => (
     </Card>
   </div>
 );
-
-ServiceCard.propTypes = {
-  coverIcon: PropTypes.element.isRequired,
-  ServiceTitle: PropTypes.string.isRequired,
-  ServiceDescription: PropTypes.string.isRequired,
-};
 
 export default ServiceCard;

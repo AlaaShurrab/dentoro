@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Typography } from 'antd';
 import {
@@ -15,7 +14,7 @@ import './style.css';
 
 const { Title } = Typography;
 
-const Footer = () => (
+const Footer = (): JSX.Element => (
   <div id="footer">
     <Row className="icons-container">
       <Col>
@@ -123,4 +122,5 @@ const Footer = () => (
     </Row>
   </div>
 );
+
 export default Footer;

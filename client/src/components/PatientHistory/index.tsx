@@ -1,7 +1,18 @@
-import React from 'react';
-import { arrayOf, objectOf, oneOfType, number, string } from 'prop-types';
 import { Table } from 'antd';
+
 import './style.css';
+
+interface historyType {
+  description: string;
+  payment: any;
+  price: any;
+  // eslint-disable-next-line camelcase
+  log_date: Date;
+}
+
+interface Props {
+  historyData: historyType[];
+}
 
 const columns = ['Description', 'Price', 'Payment', 'Remaining', 'Time'].map(
   (column) => ({
@@ -11,7 +22,7 @@ const columns = ['Description', 'Price', 'Payment', 'Remaining', 'Time'].map(
   })
 );
 
-const PatientHistory = ({ historyData }) => {
+const PatientHistory = ({ historyData }: Props): JSX.Element => {
   const data = historyData.map(
     ({ description, payment, price, log_date: Time }, index) => ({
       key: `${index + 1}`,
@@ -22,15 +33,12 @@ const PatientHistory = ({ historyData }) => {
       Remaining: (price - payment).toFixed(2),
     })
   );
+
   return (
     <div className="history-table-container">
       <Table columns={columns} dataSource={data} scroll={{ x: 900 }} />
     </div>
   );
-};
-
-PatientHistory.propTypes = {
-  historyData: arrayOf(objectOf(oneOfType([number, string]))).isRequired,
 };
 
 export default PatientHistory;

@@ -18,7 +18,7 @@ function PatientProfile() {
   });
   const { history, profile, balance } = profileData;
 
-  const [updateDate, setUpdateDate] = useState(0);
+  const [refreshDate, setRefreshDate] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const { patientId } = useParams();
@@ -41,7 +41,7 @@ function PatientProfile() {
         return setErrorMessage(err);
       }
     })();
-  }, [patientId, updateDate]);
+  }, [patientId, refreshDate]);
 
   return (
     <div className="profile-page-container">
@@ -63,11 +63,11 @@ function PatientProfile() {
               <PatientDetailsForm
                 profileData={{ ...profile, balance }}
                 patientId={+patientId}
-                setUpdateDate={setUpdateDate}
+                setRefreshDate={setRefreshDate}
               />
               <PatientTreatmentForm
                 patientId={+patientId}
-                setUpdateDate={setUpdateDate}
+                setRefreshDate={setRefreshDate}
               />
               <PatientHistory historyData={history} patientId={+patientId} />
             </>

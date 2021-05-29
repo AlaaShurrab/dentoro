@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
-import { Button, Typography, Anchor, BackTop, Dropdown, Menu } from 'antd';
+import { Button, Typography, Anchor, BackTop, Dropdown } from 'antd';
 
 import { Link } from 'react-router-dom';
 import {
@@ -9,18 +7,24 @@ import {
   UserOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons';
+
 import List from '../common/List';
 import LogoImage from '../common/Image';
 import logo from '../../assets/images/logo.png';
 import addressInfo from '../../utils/addressInfo';
+
 import './style.css';
+
+interface Props {
+  [otherProps: string]: any;
+}
 
 const { Link: AntLink } = Anchor;
 
 const { Title } = Typography;
 const { info } = addressInfo({ iconClassName: 'navbar-icon' });
 
-const AnchorLinks = ({ ...otherProps }) => (
+const AnchorLinks = ({ ...otherProps }: Props): JSX.Element => (
   <Anchor {...otherProps} affix={false}>
     <AntLink title="Home" href="#home">
       <DownOutlined className="navbar-link-icon" />
@@ -72,7 +76,6 @@ const NavBar = () => (
             className="navbar-book-button"
             title="Book an appointment"
             href="#booking-form"
-            affix={false}
           >
             <AuditOutlined className="navbar-link-icon navbar-book-icon" />
           </AntLink>

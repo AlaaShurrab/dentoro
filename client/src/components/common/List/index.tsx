@@ -1,10 +1,19 @@
-import React from 'react';
 import { List } from 'antd';
 
-const CustomList = ({ ...otherProps }) => (
+interface Props {
+  [otherProps: string]: any;
+}
+
+interface itemData {
+  title: string;
+  icon: string;
+  description: string;
+}
+
+const CustomList = ({ ...otherProps }: Props): JSX.Element => (
   <List
     {...otherProps}
-    renderItem={(item) => (
+    renderItem={(item: itemData) => (
       <List.Item key={item.title}>
         <List.Item.Meta
           avatar={item.icon}

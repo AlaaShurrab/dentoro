@@ -1,18 +1,17 @@
-import React from 'react';
 import { Typography } from 'antd';
 
 import './style.css';
-import { string } from 'prop-types';
+
+interface Props {
+  text: string;
+}
 
 const { Title } = Typography;
 
-const CustomTitle = ({ text }) => (
+const CustomTitle = ({ text }: Props): JSX.Element => (
   <Title className="custom-title" level={2}>
     {text}
   </Title>
 );
 
-CustomTitle.propTypes = {
-  text: string.isRequired,
-};
 export default CustomTitle;

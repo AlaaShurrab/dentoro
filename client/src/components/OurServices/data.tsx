@@ -1,7 +1,6 @@
-import React from 'react';
 import ServiceCard from '../ServiceCard';
 
-const Services = [
+const Services: JSX.Element[] = [
   <ServiceCard
     key="1"
     coverIcon={

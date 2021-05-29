@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useLocation, Link, useHistory } from 'react-router-dom';
-import { get } from 'axios';
-import { element } from 'prop-types';
-import './style.css';
+import Axios from 'axios';
 
 import { Layout, Menu, Typography } from 'antd';
 import {
@@ -15,22 +13,30 @@ import {
 } from '@ant-design/icons';
 
 import { useAuth } from '../../Context/isAuthContext';
-
 import logo from '../../assets/images/logo.png';
 import LogoImage from '../common/Image';
 
+import './style.css';
+
+interface Props {
+  children: ReactNode;
+}
+
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
-const Sidebar = ({ children }) => {
+
+const Sidebar = ({ children }: Props): JSX.Element => {
   const { pathname } = useLocation();
   const [, setIsAuth] = useAuth();
 
   const history = useHistory();
   const [collapsed, setCollapsed] = useState(false);
-  const onCollapse = (collapsedValue) => setCollapsed(collapsedValue);
+
+  const onCollapse = (collapsedValue: boolean) => setCollapsed(collapsedValue);
+
   const logoutFunction = async () => {
-    await get('/api/v1/logout');
-    setIsAuth(false);
+    await Axios.get('/api/v1/logout');
+    if (setIsAuth) setIsAuth(false);
     history.push('/login');
   };
 
@@ -86,7 +92,6 @@ const Sidebar = ({ children }) => {
             <Link to="/dashboard/patients">Patients</Link>
           </Menu.Item>
         </Menu>
-        {/* <Menu.Divider /> */}
         <Menu theme="dark">
           <Menu.Item
             onClick={logoutFunction}
@@ -120,10 +125,6 @@ const Sidebar = ({ children }) => {
       </Layout>
     </Layout>
   );
-};
-
-Sidebar.propTypes = {
-  children: element.isRequired,
 };
 
 export default Sidebar;
