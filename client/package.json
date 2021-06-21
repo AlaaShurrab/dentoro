@@ -29,7 +29,9 @@
     "lint:code": "eslint --fix ./src --ext .js,.jsx,.ts,.tsx",
     "lint:type": "tsc",
     "lint:format": "prettier -w . -u --loglevel silent",
-    "lint:style": "stylelint --fix \"**/*.{css,ts,tsx}\""
+    "lint:style": "stylelint --fix \"**/*.{css,ts,tsx}\"",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix",
@@ -60,6 +62,12 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.1.14",
+    "@storybook/addon-essentials": "^6.1.14",
+    "@storybook/addon-links": "^6.1.14",
+    "@storybook/node-logger": "^6.1.14",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.14",
     "lint-staged": "^11.0.0",
     "@types/loadable__component": "^5.13.3",
     "@types/mapbox-gl": "^2.1.2",
