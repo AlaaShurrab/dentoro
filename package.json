@@ -18,7 +18,7 @@
     "start": "cd server && yarn start",
     "server": "cd server && yarn dev",
     "client": "cd client && yarn start",
-    "heroku:postBuild": "cd client && yarn && yarn run build",
+    "heroku:postBuild": "cd client && yarn && yarn build",
     "lint": "cd client && yarn lint && cd ../server && yarn lint",
     "test": "cd server && yarn test",
     "kill": "fuser -k 5000/tcp",
