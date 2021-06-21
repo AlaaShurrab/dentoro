@@ -31,6 +31,11 @@
     "lint:format": "prettier -w . -u --loglevel silent",
     "lint:style": "stylelint --fix \"**/*.{css,ts,tsx}\""
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix",
+    "*.{css,scss,sass}": "stylelint --fix",
+    "**/*": "prettier -w -u"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@loadable/component": "^5.14.1",
@@ -55,6 +60,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "lint-staged": "^11.0.0",
     "@types/loadable__component": "^5.13.3",
     "@types/mapbox-gl": "^2.1.2",
     "@types/prop-types": "^15.7.3",
