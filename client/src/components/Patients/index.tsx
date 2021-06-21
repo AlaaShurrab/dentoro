@@ -48,7 +48,8 @@ const Patients = (): JSX.Element => {
       setDataSource(data);
       setLoading(false);
       return hideLoadingMessage.then(() => successMessage(data.length));
-    } catch (error) {
+    } catch (error: any) {
+      // TODO
       setLoading(false);
       return hideLoadingMessage.then(() =>
         failedMessage(
