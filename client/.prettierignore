@@ -1,0 +1,9 @@
+# Production
+public/*
+!public/manifest.json
+
+# Misc
+*.log
+
+# style file
+*.css

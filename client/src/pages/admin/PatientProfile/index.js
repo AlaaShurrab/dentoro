@@ -18,33 +18,31 @@ function PatientProfile() {
   });
   const { history, profile, balance } = profileData;
 
-  const [updateDate, setUpdateDate] = useState(0);
+  const [refreshDate, setRefreshDate] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const { patientId } = useParams();
-
-  const getPatientProfileData = async () => {
-    try {
-      const {
-        data: { data: patientProfileData },
-      } = await get(`/api/v1/patients/${patientId}`);
-      setLoading(false);
-      return setProfileData(patientProfileData);
-    } catch (err) {
-      setLoading(false);
-      if (err.response) {
-        const {
-          response: { data },
-        } = err;
-        return setErrorMessage(data.message ? data.message : data);
-      }
-      return setErrorMessage(err);
-    }
-  };
-
   useEffect(() => {
-    getPatientProfileData();
-  }, [patientId, updateDate]);
+    (async () => {
+      try {
+        const {
+          data: { data: patientProfileData },
+        } = await get(`/api/v1/patients/${patientId}`);
+        setLoading(false);
+        return setProfileData(patientProfileData);
+      } catch (err) {
+        setLoading(false);
+        if (err.response) {
+          const {
+            response: { data },
+          } = err;
+          return setErrorMessage(data.message ? data.message : data);
+        }
+        return setErrorMessage(err);
+      }
+    })();
+  }, [patientId, refreshDate]);
+
   return (
     <div className="profile-page-container">
       {loading ? (
@@ -65,11 +63,11 @@ function PatientProfile() {
               <PatientDetailsForm
                 profileData={{ ...profile, balance }}
                 patientId={+patientId}
-                setUpdateDate={setUpdateDate}
+                setRefreshDate={setRefreshDate}
               />
               <PatientTreatmentForm
                 patientId={+patientId}
-                setUpdateDate={setUpdateDate}
+                setRefreshDate={setRefreshDate}
               />
               <PatientHistory historyData={history} patientId={+patientId} />
             </>

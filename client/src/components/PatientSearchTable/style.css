@@ -1,47 +1,47 @@
 .editable-row .ant-form-item-explain {
-    position: absolute;
-    top: 100%;
-    font-size: 12px;
-  }
-
-.icon{ 
-  font-size: 21px; 
-  margin: 0 10px; 
+  position: absolute;
+  top: 100%;
+  font-size: 12px;
 }
 
-.delete-icon{
-  color: red; 
+.icon {
+  font-size: 21px;
+  margin: 0 10px;
 }
 
-.confirm-edit-icon{
+.delete-icon {
+  color: red;
+}
+
+.confirm-edit-icon {
   color: green;
 }
 
-.cancel-edit-icon{
+.cancel-edit-icon {
   color: red;
 }
+
 .row-click-pointer {
-    font-weight: 500;
-    cursor: pointer;
-    text-transform: capitalize;
-    transition: text-decoration 2s linear 1s;
-    text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: text-decoration 2s linear 1s;
+  text-decoration: none;
 }
 
-.row-click-pointer::after{
+.row-click-pointer::after {
   content: '';
-  width: 0px;
+  width: 0;
   height: 2px;
   display: block;
   background: #001529;
   transition: width 300ms;
 }
 
-.row-click-pointer:hover::after{
+.row-click-pointer:hover::after {
   width: 50%;
 }
 
-.patient-search-table-status .ant-checkbox-inner{
-border-color: #001529;
+.patient-search-table-status .ant-checkbox-inner {
+  border-color: #001529;
 }
-

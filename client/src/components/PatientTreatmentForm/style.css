@@ -12,16 +12,16 @@
   width: 100%;
 }
 
-.patient-treatment-form-flex{
+.patient-treatment-form-flex {
   display: flex;
 }
 
-.patient-treatment-form-full-width{
+.patient-treatment-form-full-width {
   width: 100%;
 }
-.patient-treatment-form-full-width-flex{
-width: 100%;
-display: flex;
-justify-content: space-evenly;
-}
 
+.patient-treatment-form-full-width-flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}

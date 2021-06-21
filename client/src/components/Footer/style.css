@@ -1,30 +1,30 @@
-.icons-container{
-    display: flex;
-    justify-content: space-around;
-    padding: 20px 0;
-    width: 100vw;
-    background-color: #2E282D;
-    color: #fff ;
+.icons-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+  width: 100vw;
+  background-color: #2e282d;
+  color: #fff;
 }
 
-.icons-container a{
-    color: #B0AEB0 !important;
+.icons-container a {
+  color: #b0aeb0 !important;
 }
 
-.icons-container .description{
-    color: #B0AEB0 !important;
+.icons-container .description {
+  color: #b0aeb0 !important;
 }
 
 .link:hover {
-    color: #52CDDE !important
+  color: #52cdde !important;
 }
 
-.icons-container img{
-    height: 5rem !important;
-    width: 5rem !important;
-    margin-bottom: 10px;
+.icons-container img {
+  height: 5rem !important;
+  width: 5rem !important;
+  margin-bottom: 10px;
 }
 
-.icons-container .title{
-    color: #fff;
+.icons-container .title {
+  color: #fff;
 }
